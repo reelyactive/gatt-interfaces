@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+          content="Sensor-Works BluVib Bluetooth GATT web interface for Pareto Anywhere by reelyActive.">
+    <link rel="stylesheet" href="../style/bootstrappyactive.min.css">
+    <script type="module" src="../js/color-modes.js"></script>
+    <title> Sensor-Works BluVib </title>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary shadow">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="https://www.reelyactive.com/">
+          <img src="../images/reelyactive-logo-square-nav.png"
+               width="30" height="30" alt="reelyActive">
+        </a>
+        <a class="navbar-brand" href="/">
+          <img src="../images/pareto-anywhere-logo-nav.png"
+               width="162" height="30" alt="Pareto Anywhere">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarItems" aria-controls="navbarItems"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarItems">
+          <!-- Left-aligned navigation items -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          </ul>
+          <!-- Right-aligned navigation items -->
+          <ul class="navbar-nav">
+            <!-- Colour theme chooser -->
+            <li class="nav-item dropdown">
+              <button class="btn btn-link nav-link dropdown-toggle"
+                      id="bd-theme" type="button" aria-expanded="false"
+                      data-bs-toggle="dropdown" data-bs-display="static"
+                      aria-label="Toggle theme (auto)">
+                <i class="fas fa-adjust"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end shadow"
+                  aria-labelledby="bd-theme-text">
+                <li>
+                  <button type="button" class="dropdown-item"
+                          data-bs-theme-value="light" aria-pressed="false">
+                    <i class="fas fa-sun"></i> Light
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item"
+                          data-bs-theme-value="dark" aria-pressed="false">
+                    <i class="fas fa-moon"></i> Dark
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item active"
+                          data-bs-theme-value="auto" aria-pressed="true">
+                    <i class="fas fa-adjust"></i> Auto
+                  </button>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarInfoDropdown"
+                 role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                 aria-expanded="false">
+                <i class="fas fa-question-circle"></i>
+              </a>
+              <!-- Info about tracking and open source software/licenses -->
+              <ul class="dropdown-menu dropdown-menu-end shadow"
+                   aria-labelledby="navbarInfoDropdown">
+                <li>
+                  <a class="dropdown-item"
+                     href="https://www.reelyactive.com/how-we-observe/#digital">
+                    <i class="fas fa-mouse-pointer"></i>
+                    Behaviour tracking free &nbsp;
+                    <span class="badge bg-success animate-breathing">
+                      <i class="fas fa-user-shield"></i>
+                    </span>
+                  </a>
+                </li>
+                <li class="dropdown-divider"></li>
+                <li>
+                  <a class="dropdown-item" target="_blank"
+                     href="https://getbootstrap.com">
+                    <i class="fab fa-bootstrap"></i>
+                    Bootstrap 5 &nbsp;
+                    <span class="badge bg-light text-dark">
+                      <i class="fab fa-osi"></i> MIT
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" target="_blank"
+                     href="https://fontawesome.com">
+                    <i class="fab fa-font-awesome"></i>
+                    Font Awesome (Free) &nbsp;
+                    <span class="badge bg-light text-dark">
+                      <i class="fab fa-creative-commons"></i>
+                      <i class="fab fa-osi"></i> MIT
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" target="_blank"
+                     href="https://github.com/reelyactive/web-style-guide/">
+                    <i class="fas fa-code"></i>
+                    Web Style Guide &nbsp;
+                    <span class="badge bg-light text-dark">
+                      <i class="fab fa-osi"></i> MIT
+                   </span>
+                  </a>
+                </li>
+                <li class="dropdown-divider"></li>
+                <li>
+                  <a class="dropdown-item" target="_blank"
+                     href="https://www.reelyactive.com/made-in-montreal/">
+                    <i class="fab fa-canadian-maple-leaf"></i>
+                    Made in Montr&eacute;al &nbsp;
+                    <i class="fas fa-city"></i>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Content -->
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
+          <h1 class="mt-4"> Sensor-Works BluVib </h1>
+          <p class="lead text-body-secondary"> <i class="fab fa-bluetooth"></i> GATT device interface </p>
+          <div class="accordion accordion-flush" id="servicesaccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="infoheading">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#infocollapse"
+                        aria-expanded="false" aria-controls="infocollapse">
+                  Sensor Information
+                </button>
+              </h2>
+              <div id="infocollapse" class="accordion-collapse collapse"
+                   aria-labelledby="infoheading"
+                   data-bs-parent="#servicesaccordion">
+                <div class="accordion-body">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="seriallabel"> Serial Number: </span>
+                    <input type="text" class="form-control" id="serialnumber"
+                           aria-label="Serial number"
+                           aria-describedby="seriallabel" readonly>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="serialread"> Read </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="vibrationheading">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#vibrationcollapse"
+                        aria-expanded="false" aria-controls="vibrationcollapse">
+                  Vibration
+                </button>
+              </h2>
+              <div id="vibrationcollapse" class="accordion-collapse collapse"
+                   aria-labelledby="vibrationheading"
+                   data-bs-parent="#servicesaccordion">
+                <div class="accordion-body">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="gainlabel"> Gain: </span>
+                    <select class="form-select" aria-label="Gain selection"
+                            aria-describedby="gainlabel" id="gainselection">
+                      <option selected> Select gain </option>
+                      <option value="1"> 1 </option>
+                      <option value="2"> 2 </option>
+                      <option value="4"> 4 </option>
+                      <option value="8"> 8 </option>
+                      <option value="10"> 10 </option>
+                    </select>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="gainread"> Read </button>
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="gainwrite"> Write </button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="sampleratelabel"> Sample rate: </span>
+                    <select class="form-select" id="samplerateselection"
+                            aria-label="Sample rate selection"
+                            aria-describedby="sampleratelabel">
+                      <option selected> Select rate </option>
+                      <option value="1"> 25600 Hz </option>
+                      <option value="2"> 12800 Hz </option>
+                      <option value="3"> 5120 Hz </option>
+                      <option value="4"> 2560 Hz </option>
+                      <option value="5"> 1280 Hz </option>
+                      <option value="6"> 512 Hz </option>
+                      <option value="7"> 256 Hz </option>
+                    </select>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="samplerateread"> Read </button>
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="sampleratewrite"> Write </button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="tracelengthlabel"> Trace length: </span>
+                    <select class="form-select" id="tracelengthselection"
+                            aria-label="Trace length selection"
+                            aria-describedby="tracelengthlabel">
+                      <option selected> Select number of samples </option>
+                      <option value="0"> 64 samples </option>
+                      <option value="1"> 128 samples </option>
+                      <option value="2"> 256 samples </option>
+                      <option value="3"> 512 samples </option>
+                      <option value="4"> 1024 samples </option>
+                      <option value="5"> 2048 samples </option>
+                      <option value="6"> 4096 samples </option>
+                      <option value="7"> 8192 samples </option>
+                      <option value="8"> 16384 samples </option>
+                      <option value="9"> 32768 samples </option>
+                      <option value="10"> 65536 samples </option>
+                      <option value="11"> 131072 samples </option>
+                      <option value="12"> 262144 samples </option>
+                      <option value="13"> 524288 samples </option>
+                      <option value="14"> 1048576 samples </option>
+                      <option value="15"> 2097152 samples </option>
+                    </select>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="samplerateread"> Read </button>
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="sampleratewrite"> Write </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="configheading">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#configcollapse" aria-expanded="false"
+                        aria-controls="configcollapse">
+                  Config
+                </button>
+              </h2>
+              <div id="configcollapse" class="accordion-collapse collapse"
+                   aria-labelledby="configheading"
+                   data-bs-parent="#servicesaccordion">
+                <div class="accordion-body">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="releaselabel"> Release: </span>
+                    <input type="text" class="form-control" id="serialnumber"
+                           value="There are no pending settings to release"
+                           aria-label="Pending settings"
+                           aria-describedby="releaselabel" readonly>
+                    <button class="btn btn-outline-success" type="button"
+                            id="releasewrite"> Write </button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="modelabel"> Mode: </span>
+                    <select class="form-select" aria-label="Mode selection"
+                            aria-describedby="modelabel" id="modeselection">
+                      <option selected> Select mode </option>
+                      <option value="1"> Continuous </option>
+                      <option value="2"> Wakeup </option>
+                      <option value="3"> Wakeup + </option>
+                      <option value="4"> Ready </option>
+                      <option value="5"> Event/Triggered </option>
+                    </select>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="moderead"> Read </button>
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="modewrite"> Write </button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="temperaturelabel"> Temperature: </span>
+                    <input type="text" class="form-control" id="temperature"
+                           aria-label="Temperature"
+                           aria-describedby="temperaturelabel" readonly>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="temperatureread"> Read </button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="timelabel"> Time: </span>
+                    <input type="number" class="form-control" id="timehours"
+                           aria-label="Time (hours)"
+                           aria-describedby="timehourslabel">
+                    <span class="input-group-text"
+                          id="timehourslabel"> h </span>
+                    <input type="number" class="form-control" id="timeminutes"
+                           aria-label="Time (minutes)"
+                           aria-describedby="timeminuteslabel">
+                    <span class="input-group-text"
+                          id="timeminuteslabel"> m </span>
+                    <input type="number" class="form-control" id="timeseconds"
+                           aria-label="Time (seconds)"
+                           aria-describedby="timesecondslabel">
+                    <span class="input-group-text"
+                          id="timesecondslabel"> s </span>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="timeread"> Read </button>
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="timewrite"> Write </button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="wakeuptimelabel"> Wakeup time: </span>
+                    <input type="number" class="form-control"
+                           id="wakeuptimehours"
+                           aria-label="Wakeup time (hours)"
+                           aria-describedby="wakeuptimehourslabel">
+                    <span class="input-group-text"
+                          id="wakeuptimehourslabel"> h </span>
+                    <input type="number" class="form-control"
+                           id="wakeuptimeminutes"
+                           aria-label="Wakeup time (minutes)"
+                           aria-describedby="wakeuptimeminuteslabel">
+                    <span class="input-group-text"
+                          id="wakeuptimeminuteslabel"> m </span>
+                    <input type="number" class="form-control"
+                           id="wakeuptimeseconds"
+                           aria-label="Wakeup time (seconds)"
+                           aria-describedby="wakeuptimesecondslabel">
+                    <span class="input-group-text"
+                          id="wakeuptimesecondslabel"> s </span>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="wakeuptimeread"> Read </button>
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="wakeuptimewrite"> Write </button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="wakeupintervallabel"> Wakeup interval: </span>
+                    <input type="number" class="form-control"
+                           id="wakeupinterval" aria-label="Wakeup interval"
+                           aria-describedby="wakeupintervallabel">
+                    <span class="input-group-text"
+                          id="wakeupintervalsecondslabel"> s </span>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="wakeupintervalread"> Read </button>
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="wakeupinterval"> Write </button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="batterylabel"> Battery voltage: </span>
+                    <input type="text" class="form-control" id="battery"
+                           aria-label="Battery voltage"
+                           aria-describedby="batterylabel" readonly>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="temperatureread"> Read </button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="capturetimelabel"> Capture time: </span>
+                    <input type="number" class="form-control"
+                           id="capturetimehours"
+                           aria-label="Capture time (hours)"
+                           aria-describedby="capturetimehourslabel">
+                    <span class="input-group-text"
+                          id="capturetimehourslabel"> h </span>
+                    <input type="number" class="form-control"
+                           id="capturetimeminutes"
+                           aria-label="Capture time (minutes)"
+                           aria-describedby="capturetimeminuteslabel">
+                    <span class="input-group-text"
+                          id="capturetimeminuteslabel"> m </span>
+                    <input type="number" class="form-control"
+                           id="capturetimeseconds"
+                           aria-label="Capture time (seconds)"
+                           aria-describedby="capturetimesecondslabel">
+                    <span class="input-group-text"
+                          id="capturetimesecondslabel"> s </span>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="capturetimeread"> Read </button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="holdoffintervallabel"> Holdoff interval: </span>
+                    <input type="number" class="form-control"
+                           id="holdoffinterval" aria-label="Holdoff interval"
+                           aria-describedby="holdoffintervallabel">
+                    <span class="input-group-text"
+                          id="holdoffintervalsecondslabel"> s </span>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="holdoffintervalread"> Read </button>
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="holdoffinterval"> Write </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="systemheading">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#systemcollapse" aria-expanded="false"
+                        aria-controls="systemcollapse">
+                  System
+                </button>
+              </h2>
+              <div id="systemcollapse" class="accordion-collapse collapse"
+                   aria-labelledby="systemheading"
+                   data-bs-parent="#servicesaccordion">
+                <div class="accordion-body">
+                  <p class="text-center">
+                    <button type="button" class="btn btn-warning"
+                            id="systemshutdownwrite"> Shutdown </button>
+                    <button type="button" class="btn btn-warning"
+                            id="systemrestartwrite"> Restart </button>
+                    <button type="button" class="btn btn-danger"
+                            id="systemfactoryresetwrite">
+                      Factory Reset
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer bg-dark bg-gradient">
+      <a href="https://github.com/reelyactive/gatt-interfaces"> gatt-interfaces </a>
+      &nbsp; | &nbsp;
+      <a href="https://www.reelyactive.com"> &copy; reelyActive 2024 </a>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <script defer src="../js/fontawesome-reelyactive.min.js"></script>
+    <script src="../js/bootstrappyactive.bundle.min.js"></script>
+  </body>
+</html>
