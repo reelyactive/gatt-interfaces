@@ -135,6 +135,35 @@
         <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
           <h1 class="mt-4"> Sensor-Works BluVib </h1>
           <p class="lead text-body-secondary"> <i class="fab fa-bluetooth"></i> GATT device interface </p>
+          <!-- Webble card -->
+          <div id="webbleCard" class="card text-bg-primary my-3" hidden>
+            <div class="row">
+              <div class="col-lg-4 align-self-center">
+                <div class="card-body">
+                  <p class="card-title mb-0">
+                    <i class="fab fa-bluetooth"></i> Web Bluetooth
+                  </p>
+                </div>
+              </div>
+              <div class="col-lg-4 align-self-center">
+              </div>
+              <div class="col-lg-4 text-end align-self-center">
+                <div class="card-body">
+                  <p class="card-text mb-0">
+                    <button id="webbleConnectButton"
+                            class="btn btn-sm btn-outline-light">
+                      <i class="fas fa-compress-alt"></i>
+                    </button>
+                    <button id="webbleDisconnectButton"
+                            class="btn btn-sm btn-outline-light" disabled>
+                      <i class="fas fa-expand-alt"></i>
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- GATT -->
           <div class="accordion accordion-flush" id="servicesaccordion">
             <div class="accordion-item">
               <h2 class="accordion-header" id="infoheading">
@@ -441,5 +470,7 @@
     <!-- Optional JavaScript -->
     <script defer src="../js/fontawesome-reelyactive.min.js"></script>
     <script src="../js/bootstrappyactive.bundle.min.js"></script>
+    <script src="../js/webble.js"></script>
+    <script src="../js/sensorworks-bluvib.js"></script>
   </body>
 </html>
