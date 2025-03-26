@@ -36,7 +36,9 @@ const UI_CHARACTERISTICS = new Map([
     readButton: document.querySelector('#tracelengthread'),
     writeButton: document.querySelector('#tracelengthwrite')
   }],
-  [ "1c930031-d459-11e7-9296-b8e856369374", { // Release
+  [ "1c930030-d459-11e7-9296-b8e856369374", { // Release
+    element: { value: 1 },
+    valueType: "Uint8",
     writeButton: document.querySelector('#releasewrite')
   }],
   [ "1c930031-d459-11e7-9296-b8e856369374", { // Mode
@@ -86,6 +88,11 @@ UI_CHARACTERISTICS.forEach((characteristic, uuid) => {
   if(characteristic.readButton) {
     characteristic.readButton.addEventListener('click', () => {
       readDeviceCharacteristic(uuid);
+    });
+  }
+  if(characteristic.writeButton) {
+    characteristic.writeButton.addEventListener('click', () => {
+      writeDeviceCharacteristic(uuid);
     });
   }
 });
@@ -145,6 +152,23 @@ function readDeviceCharacteristic(uuid) {
   }
 }
 
+// Write the given characteristic
+function writeDeviceCharacteristic(uuid) {
+  if(UI_CHARACTERISTICS.has(uuid)) {
+    let ui = UI_CHARACTERISTICS.get(uuid);
+
+    if(ui.element?.value && ui.valueType) {
+      let value = encodeValue(ui.element.value, ui.valueType);
+      webble.writeCharacteristic(uuid, value, (error) => {
+        if(error) { handleWebbleError(error); }
+        else { // This is specific to BluVib sensors
+          releaseinput.value = "Click Write to commit changes to sensor";
+        }
+      });
+    }
+  }
+}
+
 // Interpet the given value as the given type
 function interpretValue(value, valueType) {
   if(!ArrayBuffer.isView(value) || !valueType) { return null; }
@@ -154,6 +178,17 @@ function interpretValue(value, valueType) {
     case 'Int16LE': return value.getInt16(0, true);
     case 'Uint16LE': return value.getUint16(0, true);
     case 'Uint32LE': return value.getUint32(0, true);
+    default: return null;
+  }
+}
+
+// Encode the given value as the given type
+function encodeValue(value, valueType) {
+  switch(valueType) {
+    case 'Uint8': return Uint8Array.of(value);
+    case 'Int16LE': return Int16Array.of(value);
+    case 'Uint16LE': return Uint16Array.of(value);
+    case 'Uint32LE': return Uint32Array.of(value);
     default: return null;
   }
 }

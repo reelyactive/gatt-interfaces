@@ -75,6 +75,23 @@ let webble = (function() {
     .catch(error => { return callback(error); });    
   }
 
+  // Write the given value to the given characteristic
+  let writeCharacteristic = function(uuid, value, callback) {
+    if(!device?.server.connected) { return callback('Device not connected'); }
+    if(!device.characteristics.has(uuid)) {
+      return callback('Cannot write unsupported characteristic', uuid);
+    }
+
+    let characteristic = device.characteristics.get(uuid);
+    if(characteristic.properties.write !== true) {
+      return callback('Characteristic does not support write', uuid);
+    }
+
+    characteristic.writeValueWithoutResponse(value)
+    .then(() => { return callback(null); })
+    .catch(error => { return callback(error); });
+  }
+
   // Disconnect from the device
   let disconnect = function() {
     if(!device) { return; }
@@ -103,7 +120,8 @@ let webble = (function() {
     isAvailable: isAvailable,
     on: setEventCallback,
     readCharacteristic: readCharacteristic,
-    requestDeviceAndConnect: requestDeviceAndConnect
+    requestDeviceAndConnect: requestDeviceAndConnect,
+    writeCharacteristic: writeCharacteristic
   }
 
 }());
