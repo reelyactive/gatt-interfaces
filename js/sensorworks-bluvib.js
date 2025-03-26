@@ -109,6 +109,7 @@ webble.on('disconnect', () => {
   webbleconnect.disabled = false;
   webbledisconnect.disabled = true;
   enableCharacteristicButtons(false);
+  highlightRelease(false);
 });
 
 
@@ -161,9 +162,7 @@ function writeDeviceCharacteristic(uuid) {
       let value = encodeValue(ui.element.value, ui.valueType);
       webble.writeCharacteristic(uuid, value, (error) => {
         if(error) { handleWebbleError(error); }
-        else { // This is specific to BluVib sensors
-          releaseinput.value = "Click Write to commit changes to sensor";
-        }
+        else { highlightRelease(true); } // Specific to BluVib sensors
       });
     }
   }
@@ -203,6 +202,20 @@ function enableCharacteristicButtons(isEnabled) {
       characteristic.writeButton.disabled = !isEnabled;
     }
   });
+}
+
+// Highlight (or not) the release characteristic
+function highlightRelease(isHighlighted) {
+  if(releaseinput && releasewrite) {
+    if(isHighlighted) {
+      releaseinput.value = 'Click Write to commit changes to sensor';
+      releasewrite.setAttribute('class', 'btn btn-success');
+    }
+    else {
+      releaseinput.value = 'There are no pending settings to release';
+      releasewrite.setAttribute('class', 'btn btn-outline-success');
+    }
+  }
 }
 
 // Clear a webble error
