@@ -37,7 +37,8 @@ let webble = (function() {
 
   // Read all services and characteristics
   let readAllServicesAndCharacteristics = function(callback) {
-    // TODO: first check device/isConnected?
+    if(!device.server.connected) { return callback('Device not connected'); }
+
     device.server.getPrimaryServices()
     .then((services) => {
       let queue = Promise.resolve();
@@ -60,6 +61,12 @@ let webble = (function() {
     .catch(error => { return callback(error); });
   }
 
+  // Disconnect from the device
+  let disconnect = function() {
+    if(!device) { return; }
+    if(device.server.connected) { device.server.disconnect(); }
+  }
+
   // Handle device disconnection
   function handleDisconnect() {
     eventCallbacks['disconnect'].forEach(callback => callback());
@@ -77,6 +84,7 @@ let webble = (function() {
 
   // Expose the following functions and variables
   return {
+    disconnect: disconnect,
     isAvailable: isAvailable,
     on: setEventCallback,
     readAllServicesAndCharacteristics: readAllServicesAndCharacteristics,

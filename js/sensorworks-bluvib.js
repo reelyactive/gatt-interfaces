@@ -25,10 +25,19 @@ webble.isAvailable((isAvailable) => {
 
 // Handle button clicks
 webbleConnectButton.addEventListener('click', handleConnectButton);
+webbleDisconnectButton.addEventListener('click', handleDisconnectButton);
 
 // Handle webble events
-webble.on('connect', (device) => { bluvib = device; });
-webble.on('disconnect', () => { bluvib = null; });
+webble.on('connect', (device) => {
+  bluvib = device;
+  webbleConnectButton.disabled = true;
+  webbleDisconnectButton.disabled = false;
+});
+webble.on('disconnect', () => {
+  bluvib = null;
+  webbleConnectButton.disabled = false;
+  webbleDisconnectButton.disabled = true;
+});
 
 
 // Handle a connect button click
@@ -44,6 +53,11 @@ function handleConnectButton() {
       // TODO: populate characteristic values
     });
   });
+}
+
+// Handle a disconnect button click
+function handleDisconnectButton() {
+  webble.disconnect();
 }
 
 // Clear a webble error
