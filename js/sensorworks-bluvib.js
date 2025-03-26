@@ -14,6 +14,7 @@ const REQUEST_OPTIONS = {
 };
 
 
+// Variable definitions
 let bluvib;
 
 
@@ -32,15 +33,27 @@ webble.on('disconnect', () => { bluvib = null; });
 
 // Handle a connect button click
 function handleConnectButton() {
+  clearWebbleError();
+
   webble.requestDeviceAndConnect(REQUEST_OPTIONS, (error) => {
-    if(error) {
-      return console.log('webble error:', error);
-    }
+    if(error) { return handleWebbleError(error); }
+
     webble.readAllServicesAndCharacteristics((error) => {
-      if(error) {
-        return console.log('webble error:', error);
-      }
+      if(error) { return handleWebbleError(error); }
+
       // TODO: populate characteristic values
     });
   });
+}
+
+// Clear a webble error
+function clearWebbleError() {
+  webbleAlert.textContent = '';
+  webbleAlert.hidden = true;
+}
+
+// Handle a webble error
+function handleWebbleError(error) {
+  webbleAlert.textContent = error;
+  webbleAlert.hidden = false;
 }
