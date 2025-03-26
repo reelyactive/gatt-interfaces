@@ -37,7 +37,7 @@ let webble = (function() {
 
   // Discover all services and characteristics
   let discoverServicesAndCharacteristics = function(callback) {
-    if(!device.server.connected) { return callback('Device not connected'); }
+    if(!device?.server.connected) { return callback('Device not connected'); }
 
     device.server.getPrimaryServices()
     .then((services) => {
@@ -59,7 +59,7 @@ let webble = (function() {
 
   // Read the given characteristic
   let readCharacteristic = function(uuid, callback) {
-    if(!device.server.connected) { return callback('Device not connected'); }
+    if(!device?.server.connected) { return callback('Device not connected'); }
     if(!device.characteristics.has(uuid)) {
       return callback('Cannot read unsupported characteristic', uuid);
     }
