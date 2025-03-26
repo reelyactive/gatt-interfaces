@@ -68,6 +68,21 @@ const UI_CHARACTERISTICS = new Map([
     valueType: "Uint16LE",
     readButton: document.querySelector('#holdoffintervalread'),
     writeButton: document.querySelector('#holdoffintervalwrite')
+  }],
+  [ "1c930040-d459-11e7-9296-b8e856369374", { // Shutdown
+    element: { value: 1 },
+    valueType: "Uint8",
+    writeButton: document.querySelector('#systemshutdownwrite')
+  }],
+  [ "1c930041-d459-11e7-9296-b8e856369374", { // Factory reset
+    element: { value: 1 },
+    valueType: "Uint8",
+    writeButton: document.querySelector('#systemfactoryresetwrite')
+  }],
+  [ "1c930042-d459-11e7-9296-b8e856369374", { // Restart
+    element: { value: 1 },
+    valueType: "Uint8",
+    writeButton: document.querySelector('#systemrestartwrite')
   }]
 ]);
 
