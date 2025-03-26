@@ -35,8 +35,8 @@ let webble = (function() {
     .catch(error => { return callback(error); });
   }
 
-  // Read all services and characteristics
-  let readAllServicesAndCharacteristics = function(callback) {
+  // Discover all services and characteristics
+  let discoverServicesAndCharacteristics = function(callback) {
     if(!device.server.connected) { return callback('Device not connected'); }
 
     device.server.getPrimaryServices()
@@ -48,17 +48,31 @@ let webble = (function() {
           device.services.set(service.uuid, service);
           characteristics.forEach((characteristic) => {
             device.characteristics.set(characteristic.uuid, characteristic);
-            if(characteristic.properties.read === true) {
-              characteristic.readValue()
-              .then((value) => { characteristic.value = value; })
-              .catch(error => {});
-            }
           });
         }));
       });
-      return callback(null);
+      return queue;
     })
+    .then(() => { return callback(null); })
     .catch(error => { return callback(error); });
+  }
+
+  // Read the given characteristic
+  let readCharacteristic = function(uuid, callback) {
+    if(!device.server.connected) { return callback('Device not connected'); }
+    if(!device.characteristics.has(uuid)) {
+      return callback('Cannot read unsupported characteristic', uuid);
+    }
+
+    let characteristic = device.characteristics.get(uuid);
+    if(characteristic.properties.read !== true) { return callback(null, null); }
+
+    characteristic.readValue()
+    .then((value) => {
+      characteristic.value = value;
+      return callback(null, value);
+    })
+    .catch(error => { return callback(error); });    
   }
 
   // Disconnect from the device
@@ -85,9 +99,10 @@ let webble = (function() {
   // Expose the following functions and variables
   return {
     disconnect: disconnect,
+    discoverServicesAndCharacteristics: discoverServicesAndCharacteristics,
     isAvailable: isAvailable,
     on: setEventCallback,
-    readAllServicesAndCharacteristics: readAllServicesAndCharacteristics,
+    readCharacteristic: readCharacteristic,
     requestDeviceAndConnect: requestDeviceAndConnect
   }
 
