@@ -20,23 +20,23 @@ let bluvib;
 
 // Display the Web BLE card if the browser supports the experimental feature
 webble.isAvailable((isAvailable) => {
-  webbleCard.removeAttribute('hidden');
+  webblecard.removeAttribute('hidden');
 });
 
 // Handle button clicks
-webbleConnectButton.addEventListener('click', handleConnectButton);
-webbleDisconnectButton.addEventListener('click', handleDisconnectButton);
+webbleconnect.addEventListener('click', handleConnectButton);
+webbledisconnect.addEventListener('click', handleDisconnectButton);
 
 // Handle webble events
 webble.on('connect', (device) => {
   bluvib = device;
-  webbleConnectButton.disabled = true;
-  webbleDisconnectButton.disabled = false;
+  webbleconnect.disabled = true;
+  webbledisconnect.disabled = false;
 });
 webble.on('disconnect', () => {
   bluvib = null;
-  webbleConnectButton.disabled = false;
-  webbleDisconnectButton.disabled = true;
+  webbleconnect.disabled = false;
+  webbledisconnect.disabled = true;
 });
 
 
@@ -62,12 +62,12 @@ function handleDisconnectButton() {
 
 // Clear a webble error
 function clearWebbleError() {
-  webbleAlert.textContent = '';
-  webbleAlert.hidden = true;
+  webblealert.textContent = '';
+  webblealert.hidden = true;
 }
 
 // Handle a webble error
 function handleWebbleError(error) {
-  webbleAlert.textContent = error;
-  webbleAlert.hidden = false;
+  webblealert.textContent = error;
+  webblealert.hidden = false;
 }
