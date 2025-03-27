@@ -9,8 +9,8 @@ Supported Devices
 
 __gatt-interfaces__ supports the following Bluetooth GATT devices:
 
-| Vendor       | Device | Interface                                       |
-|:-------------|:---------------------------------------------------------|
+| Vendor       | Device | Interface                                            |
+|:-------------|:-------|------------------------------------------------------|
 | Sensor-Works | BluVib | [/sensorworks-bluvib](https://reelyactive.github.io/gatt-interfaces/sensorworks-bluvib/) |
 
 
