@@ -66,8 +66,9 @@ const UI_CHARACTERISTICS = new Map([
     writeButton: document.querySelector('#modewrite')
   }],
   [ "1c930032-d459-11e7-9296-b8e856369374", { // Temperature
-    element: document.querySelector('#temperature'),
-    valueType: "Int16LE",
+    interpretForDisplay: (value) => {
+      temperature.value = (value.getInt16(0, true) / 256).toFixed(2);
+    },
     readButton: document.querySelector('#temperatureread')
   }],
   [ "1c930033-d459-11e7-9296-b8e856369374", { // Time
