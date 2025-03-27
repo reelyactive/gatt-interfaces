@@ -70,6 +70,19 @@ const UI_CHARACTERISTICS = new Map([
     valueType: "Int16LE",
     readButton: document.querySelector('#temperatureread')
   }],
+  [ "1c930033-d459-11e7-9296-b8e856369374", { // Time
+    interpretForDisplay: (value) => {
+      interpretAsTime(value, '#timehours', '#timeminutes', '#timeseconds');
+    },
+    readButton: document.querySelector('#timeread')
+  }],
+  [ "1c930035-d459-11e7-9296-b8e856369374", { // Wakeup time
+    interpretForDisplay: (value) => {
+      interpretAsTime(value, '#wakeuptimehours', '#wakeuptimeminutes',
+                      '#wakeuptimeseconds');
+    },
+    readButton: document.querySelector('#wakeuptimeread')
+  }],
   [ "1c930036-d459-11e7-9296-b8e856369374", { // Wakeup interval
     element: document.querySelector('#wakeupinterval'),
     valueType: "Uint16LE",
@@ -86,6 +99,13 @@ const UI_CHARACTERISTICS = new Map([
     element: document.querySelector('#battery'),
     valueType: "Uint16LE",
     readButton: document.querySelector('#batteryread')
+  }],
+  [ "1c930039-d459-11e7-9296-b8e856369374", { // Capture time
+    interpretForDisplay: (value) => {
+      interpretAsTime(value, '#capturetimehours', '#capturetimeminutes',
+                      '#capturetimeseconds');
+    },
+    readButton: document.querySelector('#capturetimeread')
   }],
   [ "1c93003a-d459-11e7-9296-b8e856369374", { // Holdoff interval
     element: document.querySelector('#holdoffinterval'),
@@ -186,7 +206,12 @@ function readDeviceCharacteristic(uuid) {
       if(error) { handleWebbleError(error); }
       else if(value) {
         let ui = UI_CHARACTERISTICS.get(uuid);
-        ui.element.value = interpretValue(value, ui.valueType);
+        if(ui.element && ui.valueType) {
+          ui.element.value = interpretValue(value, ui.valueType);
+        }
+        else if(typeof ui.interpretForDisplay === 'function') {
+          ui.interpretForDisplay(value);
+        }
       }
     });
   }
@@ -218,6 +243,18 @@ function interpretValue(value, valueType) {
     case 'Uint32LE': return value.getUint32(0, true);
     default: return null;
   }
+}
+
+// Interpret the given value as time
+function interpretAsTime(value, hoursSelector, minutesSelector,
+                         secondsSelector) {
+  let hours = document.querySelector(hoursSelector);
+  let minutes = document.querySelector(minutesSelector);
+  let seconds = document.querySelector(secondsSelector);
+
+  if(hours) { hours.value = value.getUint8(0); }
+  if(minutes) { minutes.value = value.getUint8(1); }
+  if(seconds) { seconds.value = value.getUint8(2); }
 }
 
 // Encode the given value as the given type
