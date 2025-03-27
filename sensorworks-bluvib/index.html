@@ -271,6 +271,50 @@
                     <button class="btn btn-outline-secondary" type="button"
                             id="tracelengthwrite" disabled> Write </button>
                   </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="triggerdelaylabel"> Trigger delay: </span>
+                    <input type="number" class="form-control"
+                           id="triggerdelay" aria-label="Trigger delay"
+                           aria-describedby="triggerdelaylabel"
+                           min="0" max="65535">
+                    <span class="input-group-text"
+                          id="triggerdelaysampleslabel"> samples </span>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="triggerdelayread" disabled> Read </button>
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="triggerdelaywrite" disabled> Write </button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="calibrationlabel"> Calibration: </span>
+                    <input type="number" class="form-control"
+                           id="calibration" aria-label="Calibration"
+                           aria-describedby="calibrationlabel"
+                           min="-32768" max="32767">
+                    <span class="input-group-text"
+                          id="calibrationunitslabel"> uV/g x 10 </span>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="calibrationread" disabled> Read </button>
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="calibrationwrite" disabled>
+                      <i class="fas fa-ban"></i>
+                    </button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="axeslabel"> Axes: </span>
+                    <select class="form-select" aria-label="Axes selection"
+                            aria-describedby="axeslabel" id="axesselection">
+                      <option selected> Select axes </option>
+                      <option value="1"> 1 </option>
+                      <option value="3"> 3 </option>
+                    </select>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="axesread" disabled> Read </button>
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="axeswrite" disabled> Write </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -384,6 +428,20 @@
                             id="wakeupintervalread" disabled> Read </button>
                     <button class="btn btn-outline-secondary" type="button"
                             id="wakeupintervalwrite" disabled> Write </button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                          id="wakeuplevellabel"> Wakeup level: </span>
+                    <input type="number" class="form-control"
+                           id="wakeuplevel" aria-label="Wakeup level"
+                           aria-describedby="wakeuplevellabel"
+                           min="-32768" max="32767">
+                    <span class="input-group-text"
+                          id="wakeuplevelsscalelabel"> 1/32768 scale </span>
+                    <button class="btn btn-outline-primary" type="button"
+                            id="wakeuplevelread" disabled> Read </button>
+                    <button class="btn btn-outline-secondary" type="button"
+                            id="wakeuplevelwrite" disabled> Write </button>
                   </div>
                   <div class="input-group mb-3">
                     <span class="input-group-text"

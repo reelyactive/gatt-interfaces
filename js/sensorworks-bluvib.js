@@ -36,6 +36,24 @@ const UI_CHARACTERISTICS = new Map([
     readButton: document.querySelector('#tracelengthread'),
     writeButton: document.querySelector('#tracelengthwrite')
   }],
+  [ "1c930025-d459-11e7-9296-b8e856369374", { // Trigger delay
+    element: document.querySelector('#triggerdelay'),
+    valueType: "Uint16LE",
+    readButton: document.querySelector('#triggerdelayread'),
+    writeButton: document.querySelector('#triggerdelaywrite')
+  }],
+  [ "1c930029-d459-11e7-9296-b8e856369374", { // Calibration
+    element: document.querySelector('#calibration'),
+    valueType: "Int16LE",
+    readButton: document.querySelector('#calibrationread')
+    // Do not include writeButton: calibration should seldom be written!
+  }],
+  [ "1c93002b-d459-11e7-9296-b8e856369374", { // Axes
+    element: document.querySelector('#axesselection'),
+    valueType: "Uint8",
+    readButton: document.querySelector('#axesread'),
+    writeButton: document.querySelector('#axeswrite')
+  }],
   [ "1c930030-d459-11e7-9296-b8e856369374", { // Release
     element: { value: 1 },
     valueType: "Uint8",
@@ -57,6 +75,12 @@ const UI_CHARACTERISTICS = new Map([
     valueType: "Uint16LE",
     readButton: document.querySelector('#wakeupintervalread'),
     writeButton: document.querySelector('#wakeupintervalwrite')
+  }],
+  [ "1c930037-d459-11e7-9296-b8e856369374", { // Wakeup level
+    element: document.querySelector('#wakeuplevel'),
+    valueType: "Int16LE",
+    readButton: document.querySelector('#wakeuplevelread'),
+    writeButton: document.querySelector('#wakeuplevelwrite')
   }],
   [ "1c930038-d459-11e7-9296-b8e856369374", { // Battery
     element: document.querySelector('#battery'),
