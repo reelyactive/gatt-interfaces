@@ -1,7 +1,25 @@
 gatt-interfaces
 ===============
 
-Web interfaces for specific Bluetooth GATT devices.
+Web interfaces for specific Bluetooth GATT devices facilitating the reading and writing of services and characteristics.
+
+
+Supported Devices
+-----------------
+
+__gatt-interfaces__ supports the following Bluetooth GATT devices:
+
+| Vendor       | Device | Interface                                       |
+|:-------------|:---------------------------------------------------------|
+| Sensor-Works | BluVib | [/sensorworks-bluvib](https://reelyactive.github.io/gatt-interfaces/sensorworks-bluvib/) |
+
+
+Supported Bluetooth Interfaces
+------------------------------
+
+__gatt-interfaces__ supports the following Bluetooth interfaces to wirelessly connect with devices and read/write services and characteristics:
+- Web Bluetooth ([supported in some versions of the Chrome/Edge/Opera browsers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API#browser_compatibility))
+
 
 
 Contributing
