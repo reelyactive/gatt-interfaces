@@ -4,6 +4,18 @@ gatt-interfaces
 Web interfaces for specific Bluetooth GATT devices.
 
 
+Contributing
+------------
+
+Discover [how to contribute](CONTRIBUTING.md) to this open source project which upholds a standard [code of conduct](CODE_OF_CONDUCT.md).
+
+
+Security
+--------
+
+Consult our [security policy](SECURITY.md) for best practices using this open source software and to report vulnerabilities.
+
+
 License
 -------
 
