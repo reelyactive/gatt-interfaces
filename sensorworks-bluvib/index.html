@@ -371,17 +371,17 @@
                     <span class="input-group-text"
                           id="timelabel"> Time: </span>
                     <input type="number" class="form-control" id="timehours"
-                           aria-label="Time (hours)"
+                           aria-label="Time (hours)" min="0" max="23"
                            aria-describedby="timehourslabel">
                     <span class="input-group-text"
                           id="timehourslabel"> h </span>
                     <input type="number" class="form-control" id="timeminutes"
-                           aria-label="Time (minutes)"
+                           aria-label="Time (minutes)" min="0" max="59"
                            aria-describedby="timeminuteslabel">
                     <span class="input-group-text"
                           id="timeminuteslabel"> m </span>
                     <input type="number" class="form-control" id="timeseconds"
-                           aria-label="Time (seconds)"
+                           aria-label="Time (seconds)" min="0" max="59"
                            aria-describedby="timesecondslabel">
                     <span class="input-group-text"
                           id="timesecondslabel"> s </span>
@@ -395,19 +395,19 @@
                           id="wakeuptimelabel"> Wakeup time: </span>
                     <input type="number" class="form-control"
                            id="wakeuptimehours"
-                           aria-label="Wakeup time (hours)"
+                           aria-label="Wakeup time (hours)" min="0" max="23"
                            aria-describedby="wakeuptimehourslabel">
                     <span class="input-group-text"
                           id="wakeuptimehourslabel"> h </span>
                     <input type="number" class="form-control"
                            id="wakeuptimeminutes"
-                           aria-label="Wakeup time (minutes)"
+                           aria-label="Wakeup time (minutes)" min="0" max="59"
                            aria-describedby="wakeuptimeminuteslabel">
                     <span class="input-group-text"
                           id="wakeuptimeminuteslabel"> m </span>
                     <input type="number" class="form-control"
                            id="wakeuptimeseconds"
-                           aria-label="Wakeup time (seconds)"
+                           aria-label="Wakeup time (seconds)" min="0" max="59"
                            aria-describedby="wakeuptimesecondslabel">
                     <span class="input-group-text"
                           id="wakeuptimesecondslabel"> s </span>
@@ -421,7 +421,8 @@
                           id="wakeupintervallabel"> Wakeup interval: </span>
                     <input type="number" class="form-control"
                            id="wakeupinterval" aria-label="Wakeup interval"
-                           aria-describedby="wakeupintervallabel">
+                           aria-describedby="wakeupintervallabel"
+                           min="0" max="65535">
                     <span class="input-group-text"
                           id="wakeupintervalsecondslabel"> s </span>
                     <button class="btn btn-outline-primary" type="button"
@@ -481,7 +482,8 @@
                           id="holdoffintervallabel"> Holdoff interval: </span>
                     <input type="number" class="form-control"
                            id="holdoffinterval" aria-label="Holdoff interval"
-                           aria-describedby="holdoffintervallabel">
+                           aria-describedby="holdoffintervallabel"
+                           min="0" max="65535">
                     <span class="input-group-text"
                           id="holdoffintervalsecondslabel"> s </span>
                     <button class="btn btn-outline-primary" type="button"
